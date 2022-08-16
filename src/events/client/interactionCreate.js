@@ -37,6 +37,22 @@ module.exports = {
       } catch (e) {
         console.error(e)
       }
+    } else if (
+      interaction.type === InteractionType.ApplicationCommandAutocomplete
+    ) {
+      const command = client.commands.get(interaction.commandName)
+      if (!command) return
+
+      try {
+        await command.execute(interaction, client)
+      } catch (e) {
+        console.error(e)
+        await interaction.reply({
+          content: `Something when wrong while executing this command`,
+          ephemeral: true,
+        })
+      }
+      //
     }
   },
 }

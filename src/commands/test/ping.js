@@ -11,9 +11,13 @@ module.exports = {
       fetchReply: true,
     })
 
+    const user = interaction.options.getUser('user') ?? interaction.user
+
+    console.log(user)
+
     const content = `API Latency: ${client.ws.ping}ms\nClient ping: ${
       message.createdTimestamp - interaction.createdTimestamp
-    }ms`
+    }ms\nexecuted by ${user.tag}`
     await interaction.editReply({
       ephemeral: true,
       content,

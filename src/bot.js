@@ -1,10 +1,26 @@
 const env = require('./utils/env')
 
 // imports
-const { Client, Collection, GatewayIntentBits } = require('discord.js')
+const {
+  Client,
+  Collection,
+  GatewayIntentBits,
+  Partials,
+  ChannelType,
+} = require('discord.js')
 const fs = require('fs')
 
-const client = new Client({ intents: [GatewayIntentBits.Guilds] })
+const client = new Client({
+  intents: [
+    GatewayIntentBits.DirectMessages,
+    GatewayIntentBits.Guilds,
+    GatewayIntentBits.GuildPresences,
+    GatewayIntentBits.GuildMembers,
+    GatewayIntentBits.GuildBans,
+    GatewayIntentBits.GuildMessages,
+  ],
+  partials: [Partials.Channel],
+})
 
 client.commands = new Collection()
 client.buttons = new Collection()
